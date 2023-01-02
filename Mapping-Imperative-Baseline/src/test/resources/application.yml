@@ -1,0 +1,44 @@
+server:
+  port: 9999
+  tomcat:
+    accept-count: 100
+    threads:
+      max: 200
+      min-spare: 50
+spring:
+  datasource:
+    url: jdbc:h2:mem:db_belajar_mapping;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
+    username: root
+    password: root
+    driver-class-name: org.h2.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: mapping-pool
+      maximum-pool-size: 50
+      connection-timeout: 30000
+      max-lifetime: 600000
+  jpa:
+    show-sql: true
+    open-in-view: false
+    properties:
+      jakarta:
+        persistence:
+          sharedCache:
+            mode: UNSPECIFIED
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+  flyway:
+    url: jdbc:h2:mem:db_belajar_mapping;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
+    user: root
+    password: root
+    driver-class-name: org.h2.Driver
+    placeholder-replacement: false
+springdoc:
+  baseurl: https://mapping.com
+  paths-to-match: /api/v1/**
+mapping:
+  hello:
+    backend: BE
+    backend-function: sayHello

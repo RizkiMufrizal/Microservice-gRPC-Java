@@ -1,0 +1,14 @@
+server:
+  port: 9999
+  tomcat:
+    accept-count: 100
+    threads:
+      max: 200
+      min-spare: 50
+springdoc:
+  baseurl: https://mapping.com
+  paths-to-match: /api/v1/**
+mapping:
+  hello:
+    backend: BE
+    backend-function: sayHello

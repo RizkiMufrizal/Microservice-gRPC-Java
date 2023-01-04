@@ -1,0 +1,21 @@
+server:
+  port: 9999
+  tomcat:
+    accept-count: 100
+    threads:
+      max: 200
+      min-spare: 50
+springdoc:
+  baseurl: https://mapping.com
+  paths-to-match: /api/v1/**
+grpc:
+  client:
+    integration-server-grpc:
+      address: 'static://0.0.0.0:9090'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+mapping:
+  hello:
+    backend: BE
+    backend-function: sayHello

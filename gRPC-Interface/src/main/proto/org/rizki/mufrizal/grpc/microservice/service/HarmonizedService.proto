@@ -1,0 +1,13 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package org.rizki.mufrizal.grpc.microservice.service;
+import "org/rizki/mufrizal/grpc/microservice/domain/Harmonized.proto";
+
+message BackendAndBackendCode {
+  string backend = 1;
+  string backendCode = 2;
+}
+
+service HarmonizedService {
+  rpc findByBackendAndBackendCode(BackendAndBackendCode) returns (org.rizki.mufrizal.grpc.microservice.domain.HarmonizedProto);
+}

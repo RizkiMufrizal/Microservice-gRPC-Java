@@ -1,0 +1,12 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package org.rizki.mufrizal.grpc.microservice.service;
+import "org/rizki/mufrizal/grpc/microservice/domain/SystemParameter.proto";
+
+message ParamName {
+  string paramName = 1;
+}
+
+service SystemParameterService {
+  rpc findByParamName(ParamName) returns (org.rizki.mufrizal.grpc.microservice.domain.SystemParameterProto);
+}

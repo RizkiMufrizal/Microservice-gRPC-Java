@@ -1,0 +1,14 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package org.rizki.mufrizal.grpc.microservice.domain;
+
+message HarmonizedProto {
+  string id = 1;
+  string backend = 2;
+  string backendCode = 3;
+  string backendDescription = 4;
+  string harmonizedCode = 5;
+  string harmonizedDescription = 6;
+  uint32 harmonizedHttpStatus = 7;
+  bool isError = 8;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package org.rizki.mufrizal.grpc.microservice.service;
+import "org/rizki/mufrizal/grpc/microservice/domain/EndPoint.proto";
+
+message BackendAndBackendFunction {
+  string backend = 1;
+  string backendFunction = 2;
+}
+
+service EndPointService {
+  rpc findByBackendAndBackendFunction(BackendAndBackendFunction) returns (org.rizki.mufrizal.grpc.microservice.domain.EndPointProto);
+}

@@ -25,7 +25,7 @@ public class IntegrationServerGrpcClient {
     private SystemParameterServiceGrpc.SystemParameterServiceBlockingStub systemParameterServiceBlockingStub;
 
     @SneakyThrows
-    @Cacheable(key = "#backend + '-' + #backendFunction", cacheManager = "cacheManagerEndPoint", cacheNames = "ch_end_point")
+    @Cacheable(key = "#backend + '-' + #backendFunction", cacheNames = "ch_end_point")
     public EndPointProto findByBackendAndBackendFunction(String backend, String backendFunction) {
         BackendAndBackendFunction backendAndBackendFunction = BackendAndBackendFunction.newBuilder()
                 .setBackend(backend)
@@ -39,7 +39,7 @@ public class IntegrationServerGrpcClient {
         throw new ParameterNotFoundException("End Point " + backend + "-" + backendFunction + " Not Found");
     }
 
-    @Cacheable(key = "#backend + '-' + #backendCode", cacheManager = "cacheManagerHarmonized", cacheNames = "ch_harmonized")
+    @Cacheable(key = "#backend + '-' + #backendCode", cacheNames = "ch_harmonized")
     public Optional<HarmonizedProto> findByBackendAndBackendCode(String backend, String backendCode) {
         BackendAndBackendCode backendAndBackendCode = BackendAndBackendCode.newBuilder()
                 .setBackend(backend)
@@ -50,7 +50,7 @@ public class IntegrationServerGrpcClient {
     }
 
     @SneakyThrows
-    @Cacheable(key = "#paramName", cacheManager = "cacheManagerSystemParameter", cacheNames = "ch_system_parameter")
+    @Cacheable(key = "#paramName", cacheNames = "ch_system_parameter")
     public SystemParameterProto findByParamName(String paramName) {
         ParamName paramNameObject = ParamName.newBuilder()
                 .setParamName(paramName)

@@ -1,11 +1,9 @@
 package org.rizki.mufrizal.baseline.service;
 
-import org.rizki.mufrizal.baseline.domain.SystemParameter;
-
-import java.util.Optional;
+import org.rizki.mufrizal.grpc.microservice.domain.SystemParameterProto;
 
 public interface SystemParameterService {
-    Optional<SystemParameter> findByParamName(String paramName);
+    SystemParameterProto findByParamName(String paramName);
 
     void reload();
 }

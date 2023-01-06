@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.rizki.mufrizal.baseline.domain.EndPoint;
 import org.rizki.mufrizal.baseline.repository.EndPointRepository;
 import org.rizki.mufrizal.baseline.service.EndPointService;
+import org.rizki.mufrizal.grpc.microservice.domain.EndPointProto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@CacheConfig(cacheManager = "cacheManagerEndPoint", cacheNames = "ch_end_point")
+@CacheConfig(cacheNames = "ch_end_point")
 @Log4j2
 public class EndPointServiceImpl implements EndPointService {
     @Autowired
@@ -23,8 +24,21 @@ public class EndPointServiceImpl implements EndPointService {
     @Cacheable(key = "#backend + '-' + #backendFunction")
     @SneakyThrows
     @Override
-    public Optional<EndPoint> findByBackendAndBackendFunction(String backend, String backendFunction) {
-        return endPointRepository.findByBackendAndBackendFunction(backend, backendFunction);
+    public EndPointProto findByBackendAndBackendFunction(String backend, String backendFunction) {
+        Optional<EndPoint> endPointOptional = endPointRepository.findByBackendAndBackendFunction(backend, backendFunction);
+        EndPointProto endPointProto = null;
+        if (endPointOptional.isPresent()) {
+            endPointProto = EndPointProto.newBuilder()
+                    .setId(endPointOptional.get().getId())
+                    .setBackend(endPointOptional.get().getBackend())
+                    .setBackendFunction(endPointOptional.get().getBackendFunction())
+                    .setUrl(endPointOptional.get().getUrl())
+                    .setMethod(endPointOptional.get().getMethod())
+                    .setTimeout(endPointOptional.get().getTimeout())
+                    .setConnectTimeout(endPointOptional.get().getConnectTimeout())
+                    .build();
+        }
+        return endPointProto;
     }
 
     @CacheEvict(allEntries = true)
